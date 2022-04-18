@@ -1,0 +1,18 @@
+body {
+  /* background-color: lightblue; */
+  display: flex;
+  justify-content: center;
+}
+.tictactoe {
+  margin: auto;
+}
+.tdata {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+
+  border: 5px solid lightgray;
+  justify-content: center;
+  text-align: center;
+  font-size: 50px;
+}
