@@ -1,11 +1,15 @@
-let table = document.createElement("table");
-let thead = document.createElement("thead");
-let tbody = document.createElement("tbody");
+const table = document.createElement("table");
+const thead = document.createElement("thead");
+const tbody = document.createElement("tbody");
+const elemPlayerA = document.getElementById("playerA");
+const elemPlayerB = document.getElementById("playerB");
 let isPlayerA = true;
 let scoreA = 0;
 let scoreB = 0;
 let isWin = false;
 let isDouble = false;
+let isPlayMachine = false;
+let isAOrB = true; // who win the last match (for machine)
 let playerA = [];
 let playerB = [];
 let markRemain = [];
@@ -34,35 +38,30 @@ let marks = (id) => {
   const elemId = document.getElementById(id);
   if (elemId.textContent != "") return;
 
-  const elemPlayerA = document.getElementById("playerA");
-  const elemPlayerB = document.getElementById("playerB");
-
   let mark = [parseInt((id - 1) / 3), id];
 
   if (isPlayerA) {
+    elemId.innerHTML = "X";
     elemPlayerA.setAttribute("class", "row btn btn-primary");
     elemPlayerB.setAttribute("class", "row btn btn-danger");
     playerA.push(mark);
-    console.log(id);
     markRemain.splice(markRemain.indexOf(parseInt(id)), 1);
+    isPlayMachine = false;
   } else {
+    elemId.innerHTML = "O";
     elemPlayerA.setAttribute("class", "row btn btn-danger");
     elemPlayerB.setAttribute("class", "row btn btn-primary");
     playerB.push(mark);
     markRemain.splice(markRemain.indexOf(parseInt(id)), 1);
   }
-  console.log(markRemain);
-
-  elemId.innerHTML = isPlayerA ? "X" : "O";
-
-  if (playerA.length >= 3 && isPlayerA) {
+  if (playerA.length >= 3 && isPlayerA && !isWin) {
     checkMarks(playerA);
   }
-  if (playerB.length >= 3 && !isPlayerA) {
+  if (playerB.length >= 3 && !isPlayerA && !isWin) {
     checkMarks(playerB);
   }
-  //   console.log(markRemain);
   isPlayerA = !isPlayerA;
+  if (!isPlayMachine && markRemain.length > 0) playWithMachine();
 };
 
 let checkMarks = (player) => {
@@ -93,7 +92,7 @@ let playerWin = (a, b, c) => {
       alert("A win!");
       isDouble = true;
     }
-  } else {
+  } else if (!isPlayerA) {
     scoreB++;
     document.getElementById("scoreB").innerHTML = "Score : " + scoreB;
     if (!isDouble) {
@@ -121,8 +120,9 @@ let Restart = () => {
   playerA = [];
   playerB = [];
   markRemain = [];
-  isWin ? (isPlayerA = !isPlayerA) : isPlayerA;
+  //   isWin ? (isPlayerA = !isPlayerA) : isPlayerA;
   isWin = false;
+  isPlayMachine = false;
   isDouble = false;
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
@@ -134,5 +134,8 @@ let Restart = () => {
   }
 };
 
-let playWithMachine = () => {};
-
+let playWithMachine = () => {
+  let indexRemain = markRemain[Math.floor(Math.random() * markRemain.length)];
+  isPlayMachine = true;
+  marks(indexRemain);
+};
