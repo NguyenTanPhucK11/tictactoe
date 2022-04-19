@@ -54,14 +54,14 @@ let marks = (id) => {
     playerB.push(mark);
     markRemain.splice(markRemain.indexOf(parseInt(id)), 1);
   }
-  if (playerA.length >= 3 && isPlayerA && !isWin) {
+  if (playerA.length >= 3 && isPlayerA) {
     checkMarks(playerA);
   }
-  if (playerB.length >= 3 && !isPlayerA && !isWin) {
+  if (playerB.length >= 3 && !isPlayerA) {
     checkMarks(playerB);
   }
   isPlayerA = !isPlayerA;
-  if (!isPlayMachine && markRemain.length > 0) playWithMachine();
+  if (!isPlayMachine && markRemain.length > 0 && !isWin) playWithMachine();
 };
 
 let checkMarks = (player) => {
@@ -121,6 +121,7 @@ let Restart = () => {
   playerB = [];
   markRemain = [];
   //   isWin ? (isPlayerA = !isPlayerA) : isPlayerA;
+  isPlayerA = true;
   isWin = false;
   isPlayMachine = false;
   isDouble = false;
