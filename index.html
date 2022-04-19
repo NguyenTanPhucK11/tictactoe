@@ -16,15 +16,15 @@
   <body>
     <div id="tictactoe">
       <div class="row player">
-        <button id="playerA" class="col btn btn-primary">Player A</button>
-        <button id="playerB" class="col btn btn-primary">Player B</button>
+        <button id="playerA" class="col mx-1 btn btn-primary">Player A</button>
+        <button id="playerB" class="col mx-1 btn btn-primary">Player B</button>
       </div>
       <div class="row result">
-        <button id="result" class="col btn btn-warning">X/O</button>
+        <button id="result" class="col mx-1 btn btn-warning">X/O</button>
       </div>
       <div class="row score">
-        <button id="scoreA" class="col btn btn-primary">Score : 0</button>
-        <button id="scoreB" class="col btn btn-primary">Score : 0</button>
+        <button id="scoreA" class="col mx-1 btn btn-primary">Score : 0</button>
+        <button id="scoreB" class="col mx-1 btn btn-primary">Score : 0</button>
       </div>
       <div class="row reset">
         <div class="col form-check">
@@ -32,14 +32,22 @@
             class="form-check-input"
             type="checkbox"
             value=""
-            onchange="checkChecked()"
-            id="defaultCheck1"
+            onchange="checkAutoPlay()"
+            id="autoPlay"
           />
-          <label class="form-check-label" for="defaultCheck1">
-            Play with Machine
-          </label>
+          <label class="form-check-label" for=""> Auto play </label>
         </div>
-        <button class="btn btn-primary" onclick="Restart()">reset</button>
+        <div class="col form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            onchange="checkHardMode()"
+            id="hardMode"
+          />
+          <label class="form-check-label" for=""> Hard Mode</label>
+        </div>
+        <button class="btn btn-primary" onclick="Restart()">Reset</button>
       </div>
     </div>
   </body>
