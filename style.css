@@ -18,17 +18,23 @@ body {
 }
 
 .player {
-  margin: 20px;
+  margin: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .score {
-  margin: 20px;
+  margin: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .reset {
-  margin: 20px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.result {
+  margin: 10px;
   display: flex;
   justify-content: space-around;
 }

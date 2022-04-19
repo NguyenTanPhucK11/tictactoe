@@ -3,6 +3,7 @@ const thead = document.createElement("thead");
 const tbody = document.createElement("tbody");
 const elemPlayerA = document.getElementById("playerA");
 const elemPlayerB = document.getElementById("playerB");
+const elemResult = document.getElementById("result");
 let isPlayerA = true;
 let scoreA = 0;
 let scoreB = 0;
@@ -35,6 +36,7 @@ let init = () => {
 init();
 
 let marks = (id) => {
+  if (isWin) Restart();
   const elemId = document.getElementById(id);
   if (elemId.textContent != "") return;
 
@@ -42,15 +44,15 @@ let marks = (id) => {
 
   if (isPlayerA) {
     elemId.innerHTML = "X";
-    elemPlayerA.setAttribute("class", "row btn btn-primary");
-    elemPlayerB.setAttribute("class", "row btn btn-danger");
+    elemPlayerA.setAttribute("class", "col btn btn-primary");
+    elemPlayerB.setAttribute("class", "col btn btn-danger");
     playerA.push(mark);
     markRemain.splice(markRemain.indexOf(parseInt(id)), 1);
     isPlayMachine = !elemSwitch.checked;
   } else {
     elemId.innerHTML = "O";
-    elemPlayerA.setAttribute("class", "row btn btn-danger");
-    elemPlayerB.setAttribute("class", "row btn btn-primary");
+    elemPlayerA.setAttribute("class", "col btn btn-danger");
+    elemPlayerB.setAttribute("class", "col btn btn-primary");
     playerB.push(mark);
     markRemain.splice(markRemain.indexOf(parseInt(id)), 1);
   }
@@ -64,7 +66,7 @@ let marks = (id) => {
   if (!isPlayMachine && markRemain.length > 0 && !isWin) playWithMachine();
 };
 
-let checkMarks = (player) => {
+let checkMarks = async (player) => {
   for (let i = 0; i < player.length - 2; i++) {
     for (let j = i + 1; j < player.length - 1; j++) {
       for (let k = j + 1; k < player.length; k++) {
@@ -77,10 +79,13 @@ let checkMarks = (player) => {
       }
     }
   }
-  if (!isWin && playerA.length + playerB.length == 9) alert("DRAW");
+  if (!isWin && playerA.length + playerB.length == 9) {
+    await alert("DRAW");
+    await setTimeout(() => Restart(), 2000);
+  }
 };
 
-let playerWin = (a, b, c) => {
+let playerWin = async (a, b, c) => {
   isWin = true;
   document.getElementById(a).style.color = "red";
   document.getElementById(b).style.color = "red";
@@ -89,14 +94,16 @@ let playerWin = (a, b, c) => {
     scoreA++;
     document.getElementById("scoreA").innerHTML = "Score : " + scoreA;
     if (!isDouble) {
-      alert("A win!");
+      elemResult.innerHTML = "A win";
+      await alert("A win");
+      await setTimeout(() => Restart(), 2000);
       isDouble = true;
     }
   } else if (!isPlayerA) {
     scoreB++;
     document.getElementById("scoreB").innerHTML = "Score : " + scoreB;
     if (!isDouble) {
-      alert("B win!");
+      elemResult.innerHTML = "B win";
       isDouble = true;
     }
   }

@@ -15,16 +15,19 @@
   </head>
   <body>
     <div id="tictactoe">
-      <div class="col player">
-        <button id="playerA" class="row btn btn-primary">Player A</button>
-        <button id="playerB" class="row btn btn-primary">Player B</button>
+      <div class="row player">
+        <button id="playerA" class="col btn btn-primary">Player A</button>
+        <button id="playerB" class="col btn btn-primary">Player B</button>
       </div>
-      <div class="col score">
-        <button id="scoreA" class="row btn btn-primary">Score : 0</button>
-        <button id="scoreB" class="row btn btn-primary">Score : 0</button>
+      <div class="row result">
+        <button id="result" class="col btn btn-warning">X/O</button>
       </div>
-      <div class="reset">
-        <div class="form-check">
+      <div class="row score">
+        <button id="scoreA" class="col btn btn-primary">Score : 0</button>
+        <button id="scoreB" class="col btn btn-primary">Score : 0</button>
+      </div>
+      <div class="row reset">
+        <div class="col form-check">
           <input
             class="form-check-input"
             type="checkbox"
