@@ -28,7 +28,7 @@ body {
   justify-content: space-between;
 }
 .reset {
-  margin: 50px;
-  /* display: flex; */
-  /* justify-content: flex-end; */
+  margin: 20px;
+  display: flex;
+  justify-content: space-around;
 }

@@ -16,7 +16,7 @@ let markRemain = [];
 
 table.appendChild(thead);
 table.appendChild(tbody);
-
+let elemSwitch = document.getElementById("defaultCheck1");
 document.getElementById("tictactoe").appendChild(table);
 let init = () => {
   for (let i = 0; i < 3; i++) {
@@ -46,7 +46,7 @@ let marks = (id) => {
     elemPlayerB.setAttribute("class", "row btn btn-danger");
     playerA.push(mark);
     markRemain.splice(markRemain.indexOf(parseInt(id)), 1);
-    isPlayMachine = false;
+    isPlayMachine = !elemSwitch.checked;
   } else {
     elemId.innerHTML = "O";
     elemPlayerA.setAttribute("class", "row btn btn-danger");
@@ -125,6 +125,7 @@ let Restart = () => {
   isWin = false;
   isPlayMachine = false;
   isDouble = false;
+  elemSwitch.checked = false;
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       let td = document.getElementById(i * 3 + j + 1);
@@ -139,4 +140,8 @@ let playWithMachine = () => {
   let indexRemain = markRemain[Math.floor(Math.random() * markRemain.length)];
   isPlayMachine = true;
   marks(indexRemain);
+};
+
+let checkChecked = () => {
+  elemSwitch.checked ? isPlayMachine : !isPlayMachine;
 };

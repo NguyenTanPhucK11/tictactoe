@@ -23,9 +23,21 @@
         <button id="scoreA" class="row btn btn-primary">Score : 0</button>
         <button id="scoreB" class="row btn btn-primary">Score : 0</button>
       </div>
-    </div>
-    <div class="reset">
-      <button class="btn btn-primary" onclick="Restart()">reset</button>
+      <div class="reset">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            onchange="checkChecked()"
+            id="defaultCheck1"
+          />
+          <label class="form-check-label" for="defaultCheck1">
+            Play with Machine
+          </label>
+        </div>
+        <button class="btn btn-primary" onclick="Restart()">reset</button>
+      </div>
     </div>
   </body>
   <script src="app.js"></script>
