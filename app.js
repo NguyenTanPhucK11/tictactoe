@@ -4,10 +4,6 @@ let tbody = document.createElement("tbody");
 let isPlayerA = true;
 let playerA = [];
 let playerB = [];
-let colA = [];
-let colB = [];
-let rowA = [];
-let rowB = [];
 
 table.appendChild(thead);
 table.appendChild(tbody);
@@ -26,7 +22,8 @@ for (let i = 0; i < 3; i++) {
 }
 
 let marks = (id) => {
-  isPlayerA ? playerA.push(id) : playerB.push(id);
+  let mark = [parseInt((id - 1) / 3), id];
+  isPlayerA ? playerA.push(mark) : playerB.push(mark);
 
   document.getElementById(id).innerHTML = isPlayerA ? "X" : "O";
 
@@ -36,41 +33,40 @@ let marks = (id) => {
   if (playerB.length >= 3 && !isPlayerA) {
     checkMarks(playerB);
   }
+  console.log(playerA);
+  console.log(playerB);
 
   isPlayerA = !isPlayerA;
 };
 
 let checkMarks = (player) => {
-  console.log("checkMarks");
-  player.sort((a, b) => a - b);
-  for (let i = 0; i < player.length - 1; i++) {
-    if (isPlayerA) {
-      colA.push(Math.abs(player[i] - player[i + 1]));
-      rowA.push(
-        Math.abs(
-          parseInt((player[i] - 1) / 3) - parseInt((player[i + 1] - 1) / 3)
-        )
-      );
-    } else {
-      colB.push(Math.abs(player[i] - player[i + 1]));
-      rowB.push(
-        Math.abs(
-          parseInt((player[i] - 1) / 3) - parseInt((player[i + 1] - 1) / 3)
-        )
-      );
+  for (let i = 0; i < player.length - 2; i++) {
+    for (let j = i + 1; j < player.length - 1; j++) {
+      for (let k = j + 1; k < player.length; k++) {
+        if (isRow(player[i][0], player[j][0], player[k][0]))
+          alert(isPlayerA ? "A win!" : "B win!");
+        else if (isCol(player[i][0], player[j][0], player[k][0]))
+          if (isSpace(player[i][1], player[j][1], player[k][1]))
+            alert(isPlayerA ? "A win!" : "B win!");
+      }
     }
   }
-  console.log("subArr: " + subArray(colA, rowA));
-  //   if (checkDuplicate(colA) && checkDuplicate(rowA)) alert("A win!");
-  //   if (checkDuplicate(colB) && checkDuplicate(rowB)) alert("B win!");
+
   console.log("playerA: " + playerA);
   console.log("playerB: " + playerB);
-  console.log("colA: " + colA);
-  console.log("colB: " + colB);
-  console.log("rowA: " + rowA);
-  console.log("rowB: " + rowB);
-  colA = [];
-  colB = [];
-  rowA = [];
-  rowB = [];
+};
+
+let isRow = (a, b, c) => {
+  return a == b && b == c;
+};
+
+let isCol = (a, b, c) => {
+  console.log(a, b, c);
+  return a != b && b != c && a != c;
+};
+
+let isSpace = (a, b, c) => {
+  return (
+    Math.abs(a - b) == Math.abs(b - c) || Math.abs(a - b) == Math.abs(a - c)
+  );
 };
