@@ -14,7 +14,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="tictactoe"></div>
+    <div id="tictactoe">
+      <div class="col player">
+        <button id="playerA" class="row btn btn-primary">Player A</button>
+        <button id="playerB" class="row btn btn-primary">Player B</button>
+      </div>
+      <div class="col score">
+        <button id="scoreA" class="row btn btn-primary">Score : 0</button>
+        <button id="scoreB" class="row btn btn-primary">Score : 0</button>
+      </div>
+    </div>
+    <div class="reset">
+      <button class="btn btn-primary" onclick="Restart()">reset</button>
+    </div>
   </body>
   <script src="app.js"></script>
 </html>

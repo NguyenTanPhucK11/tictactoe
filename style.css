@@ -16,3 +16,19 @@ body {
   text-align: center;
   font-size: 50px;
 }
+
+.player {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.score {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.reset {
+  margin: 50px;
+  /* display: flex; */
+  /* justify-content: flex-end; */
+}
